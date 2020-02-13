@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Fájl_áthelyező.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="sourceFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\bony_labor\ToFonix\lab.msg</Value>
+    </Setting>
+    <Setting Name="sourceSemFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\bony_labor\ToFonix\lab.sem</Value>
+    </Setting>
+    <Setting Name="destinationDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">s:\ToFonix</Value>
+    </Setting>
+    <Setting Name="freqM" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="freqS" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="sourceBonyFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">s:\FromFonix\lab.msg</Value>
+    </Setting>
+    <Setting Name="sourceBonySemFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">s:\FromFonix\lab.sem</Value>
+    </Setting>
+    <Setting Name="destinationBonyDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\bony_labor\FromFonix</Value>
+    </Setting>
+    <Setting Name="send" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="receive" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
