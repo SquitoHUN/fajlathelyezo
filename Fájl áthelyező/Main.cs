@@ -17,6 +17,7 @@ namespace Fájl_áthelyező
         System.Timers.Timer t;
         int m = Properties.Settings.Default.freqM;
         int s = Properties.Settings.Default.freqS;
+        
         string sourceFile = Properties.Settings.Default.sourceFile;
         string destinationFile = Path.Combine(Properties.Settings.Default.destinationDir, Path.GetFileName(Properties.Settings.Default.sourceFile));
         string sourceSemFile = Properties.Settings.Default.sourceSemFile;
@@ -26,6 +27,16 @@ namespace Fájl_áthelyező
         string destinationBonyFile = Path.Combine(Properties.Settings.Default.destinationBonyDir, Path.GetFileName(Properties.Settings.Default.sourceBonyFile));
         string sourceBonySemFile = Properties.Settings.Default.sourceBonySemFile;
         string destinationBonySemFile = Path.Combine(Properties.Settings.Default.destinationBonyDir, Path.GetFileName(Properties.Settings.Default.sourceBonySemFile));
+
+        string sourcePecsFile = Properties.Settings.Default.sourcePecsFile;
+        string destinationPecsFile = Path.Combine(Properties.Settings.Default.destinationPecsDir, Path.GetFileName(Properties.Settings.Default.sourcePecsFile));
+        string sourcePecsSemFile = Properties.Settings.Default.sourcePecsSemFile;
+        string destinationPecsSemFile = Path.Combine(Properties.Settings.Default.destinationPecsDir, Path.GetFileName(Properties.Settings.Default.sourcePecsSemFile));
+
+        string sourcePecsLabFile = Properties.Settings.Default.sourcePecsLabFile;
+        string destinationPecsLabFile = Path.Combine(Properties.Settings.Default.destinationPecsLabDir, Path.GetFileName(Properties.Settings.Default.sourcePecsLabFile));
+        string sourcePecsLabSemFile = Properties.Settings.Default.sourcePecsLabSemFile;
+        string destinationPecsLabSemFile = Path.Combine(Properties.Settings.Default.destinationPecsLabDir, Path.GetFileName(Properties.Settings.Default.sourcePecsLabSemFile));
 
         public class FileLocker
         {
@@ -109,35 +120,36 @@ namespace Fájl_áthelyező
                             }
                             catch (Exception errmsg)
                             {
-                                string errormsg = now.Hour + ":" + now.Minute + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
+                                string errormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
                                 logger.AppendText(errormsg);
                             }
                             finally
                             {
-                                string successmsg = now.Hour + ":" + now.Minute + " -  A lelet fájl mozgatása sikeres." + Environment.NewLine;
+                                string successmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A lelet fájl mozgatása sikeres." + Environment.NewLine;
                                 logger.AppendText(successmsg);
-                            }
-
-                            try
-                            {
-                                File.Move(sourceSemFile, destinationSemFile);
-                            }
-                            catch (Exception errmsg)
-                            {
-                                string errormsg = now.Hour + ":" + now.Minute + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
-                                logger.AppendText(errormsg);
-                            }
-                            finally
-                            {
-                                string successmsg = now.Hour + ":" + now.Minute + " -  A semafor fájl mozgatása sikeres." + Environment.NewLine;
-                                logger.AppendText(successmsg);
+                                try
+                                {
+                                    File.Move(sourceSemFile, destinationSemFile);
+                                }
+                                catch (Exception errmsg)
+                                {
+                                    string errormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
+                                    logger.AppendText(errormsg);
+                                }
+                                finally
+                                {
+                                    string successsemmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A semafor fájl mozgatása sikeres." + Environment.NewLine;
+                                    logger.AppendText(successsemmsg);
+                                }
                             }
                         }
                     }
+
                     if(!Directory.Exists(@"s:\ToFonix"))
                     {
                         logger.AppendText("A célkönyvtár nem létezik." + Environment.NewLine);
                     }
+
                     if(Properties.Settings.Default.receive == true)
                     {
                         if (File.Exists(sourceBonySemFile) && File.Exists(sourceBonyFile) && !File.Exists(destinationBonyFile) && !File.Exists(destinationBonySemFile))
@@ -151,7 +163,7 @@ namespace Fájl_áthelyező
                             }
                             catch (Exception locksem)
                             {
-                                string lockerrormsg = now.Hour + ":" + now.Minute + " - Sem fájl lockolása sikertelen - Hiba: " + locksem.ToString() + Environment.NewLine;
+                                string lockerrormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Sem fájl lockolása sikertelen - Hiba: " + locksem.ToString() + Environment.NewLine;
                                 logger.AppendText(lockerrormsg);
                             }
                             finally
@@ -162,7 +174,7 @@ namespace Fájl_áthelyező
                                 }
                                 catch (Exception locklab)
                                 {
-                                    string lockerrormsg = now.Hour + ":" + now.Minute + " - Lab fájl lockolása sikertelen - Hiba: " + locklab.ToString() + Environment.NewLine;
+                                    string lockerrormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Lab fájl lockolása sikertelen - Hiba: " + locklab.ToString() + Environment.NewLine;
                                     logger.AppendText(lockerrormsg);
 
                                 }
@@ -174,12 +186,12 @@ namespace Fájl_áthelyező
                                     }
                                     catch (Exception labmoveex)
                                     {
-                                        string lockerrormsg = now.Hour + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Lab fájl mozgatása sikertelen - Hiba: " + labmoveex.ToString() + Environment.NewLine;
+                                        string lockerrormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Lab fájl mozgatása sikertelen - Hiba: " + labmoveex.ToString() + Environment.NewLine;
                                         logger.AppendText(lockerrormsg);
                                     }
                                     finally
                                     {
-                                        string successmsg = now.Hour + ":" + now.Minute + " -  A labor kérő fájl mozgatása sikeres." + Environment.NewLine;
+                                        string successmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A labor kérő fájl mozgatása sikeres." + Environment.NewLine;
                                         logger.AppendText(successmsg);
                                     }
                                     try
@@ -188,12 +200,12 @@ namespace Fájl_áthelyező
                                     }
                                     catch (Exception labsemmoveex)
                                     {
-                                        string movesemerrormsg = now.Hour + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Lab fájl mozgatása sikertelen - Hiba: " + labsemmoveex.ToString() + Environment.NewLine;
+                                        string movesemerrormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Lab fájl mozgatása sikertelen - Hiba: " + labsemmoveex.ToString() + Environment.NewLine;
                                         logger.AppendText(movesemerrormsg);
                                     }
                                     finally
                                     {
-                                        string successsemmsg = now.Hour + ":" + now.Minute + " -  A labor kérő semafor fájl mozgatása sikeres." + Environment.NewLine;
+                                        string successsemmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A labor kérő semafor fájl mozgatása sikeres." + Environment.NewLine;
                                         logger.AppendText(successsemmsg);
                                     }
                                 }
@@ -208,7 +220,80 @@ namespace Fájl_áthelyező
                             }
                         }
                     }
-                    if(File.Exists(destinationFile) && !File.Exists(destinationSemFile) && !IsFileLocked(destinationFile))
+
+                    if(Properties.Settings.Default.preceive == true)
+                    {
+                        if (File.Exists(sourcePecsSemFile) && File.Exists(sourcePecsFile) && !File.Exists(destinationPecsFile) && !File.Exists(destinationPecsSemFile))
+                        {
+                            DateTime now = DateTime.Now;
+                            try
+                            {
+                                File.Move(sourcePecsFile, destinationPecsFile);
+                            }
+                            catch (Exception errmsg)
+                            {
+                                string errormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
+                                logger.AppendText(errormsg);
+                            }
+                            finally
+                            {
+                                string successmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A pécsi lelet fájl mozgatása sikeres." + Environment.NewLine;
+                                logger.AppendText(successmsg);
+                                try
+                                {
+                                    File.Move(sourcePecsSemFile, destinationPecsSemFile);
+                                }
+                                catch (Exception errmsg)
+                                {
+                                    string errormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
+                                    logger.AppendText(errormsg);
+                                }
+                                finally
+                                {
+                                    string successsemmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A pécsi semafor fájl mozgatása sikeres." + Environment.NewLine;
+                                    logger.AppendText(successsemmsg);
+                                }
+                            }
+                        }
+                    }
+                    
+                    if(Properties.Settings.Default.psend == true)
+                    {
+                        if (File.Exists(sourcePecsLabSemFile) && File.Exists(sourcePecsLabFile) && !File.Exists(destinationPecsLabFile) && !File.Exists(destinationPecsLabSemFile))
+                        {
+                            DateTime now = DateTime.Now;
+                            try
+                            {
+                                File.Move(sourcePecsLabFile, destinationPecsLabFile);
+                            }
+                            catch (Exception errmsg)
+                            {
+                                string errormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
+                                logger.AppendText(errormsg);
+                            }
+                            finally
+                            {
+                                string successmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A pécsi-szekszárdi lelet fájl mozgatása sikeres." + Environment.NewLine;
+                                logger.AppendText(successmsg);
+                                try
+                                {
+                                    File.Move(sourcePecsLabSemFile, destinationPecsLabSemFile);
+                                }
+                                catch (Exception errmsg)
+                                {
+                                    string errormsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " - Hiba: " + errmsg.ToString() + Environment.NewLine;
+                                    logger.AppendText(errormsg);
+                                }
+                                finally
+                                {
+                                    string successsemmsg = now.Hour.ToString().PadLeft(2, '0') + ":" + now.Minute.ToString().PadLeft(2, '0') + " -  A pécsi-szekszárdi semafor fájl mozgatása sikeres." + Environment.NewLine;
+                                    logger.AppendText(successsemmsg);
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (File.Exists(destinationFile) && !File.Exists(destinationSemFile) && !IsFileLocked(destinationFile))
                     {
                         File.Create(destinationSemFile).Dispose();
                     }

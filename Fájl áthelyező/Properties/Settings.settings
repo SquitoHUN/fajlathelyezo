@@ -32,5 +32,29 @@
     <Setting Name="receive" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="sourcePecsFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">n:\szszard.msg</Value>
+    </Setting>
+    <Setting Name="sourcePecsSemFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">n:\szszard.sem</Value>
+    </Setting>
+    <Setting Name="destinationPecsDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\pte_labor\teszt\in</Value>
+    </Setting>
+    <Setting Name="sourcePecsLabFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\pte_labor\teszt\out\szszard.msg</Value>
+    </Setting>
+    <Setting Name="sourcePecsLabSemFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\pte_labor\teszt\out\szszard.sem</Value>
+    </Setting>
+    <Setting Name="destinationPecsLabDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">m:\</Value>
+    </Setting>
+    <Setting Name="psend" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="preceive" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

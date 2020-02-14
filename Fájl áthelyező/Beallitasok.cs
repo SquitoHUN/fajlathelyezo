@@ -39,6 +39,7 @@ namespace Fájl_áthelyező
 
         private void Beallitasok_Load(object sender, EventArgs e)
         {
+            //Bonyhád
             labTBox.Text = Properties.Settings.Default.sourceFile;
             labSemTBox.Text = Properties.Settings.Default.sourceSemFile;
             destDirTBox.Text = Properties.Settings.Default.destinationDir;
@@ -47,11 +48,30 @@ namespace Fájl_áthelyező
             labBonySemTBox.Text = Properties.Settings.Default.sourceBonySemFile;
             labBonyDestTBox.Text = Properties.Settings.Default.destinationBonyDir;
 
+            sendBCB.Checked = Properties.Settings.Default.send;
+            receiveBCB.Checked = Properties.Settings.Default.receive;
+
+
+            //Pécs
+            labPTBox.Text = Properties.Settings.Default.sourcePecsFile;
+            labPSemTBox.Text = Properties.Settings.Default.sourcePecsSemFile;
+            destPDirTBox.Text = Properties.Settings.Default.destinationPecsDir;
+
+            labPLTBox.Text = Properties.Settings.Default.sourcePecsLabFile;
+            labPLSemTBox.Text = Properties.Settings.Default.sourcePecsLabSemFile;
+            destPLDirTBox.Text = Properties.Settings.Default.destinationPecsLabDir;
+
             sendFreqTB.Text = Properties.Settings.Default.freqM.ToString().PadLeft(2, '0') + ":" + Properties.Settings.Default.freqS.ToString().PadLeft(2, '0');
 
-            sendCB.Checked = Properties.Settings.Default.send;
-            receiveCB.Checked = Properties.Settings.Default.receive;
+            sendPCB.Checked = Properties.Settings.Default.psend;
+            receivePCB.Checked = Properties.Settings.Default.preceive;
+
+            //Gyakoriság
+            sendFreqTB.Text = Properties.Settings.Default.freqM.ToString().PadLeft(2, '0') + ":" + Properties.Settings.Default.freqS.ToString().PadLeft(2, '0');
         }
+
+
+        //Bonyhád
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -89,37 +109,6 @@ namespace Fájl_áthelyező
                 Properties.Settings.Default.Save();
                 Properties.Settings.Default.Upgrade();
             }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            string[] ms = sendFreqTB.Text.Split(':');
-            if (ms.Length == 2)
-            {
-                string sendFreq = "00:" + ms[0].ToString().PadLeft(2, '0') + ":" + ms[1];
-                TimeSpan ts;
-                if (TimeSpan.TryParse(sendFreq, out ts))
-                {
-                    int intval = int.Parse(ms[0]);
-                    Properties.Settings.Default.freqM = intval;
-                    intval = int.Parse(ms[1]);
-                    Properties.Settings.Default.freqS = intval;
-                }
-                else
-                {
-                    MessageBox.Show("Rossz idő formátum! (mm:ss)");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Rossz idő formátum! (mm:ss)");
-            }
-            Properties.Settings.Default.send = sendCB.Checked;
-            Properties.Settings.Default.receive = receiveCB.Checked;
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Upgrade();
-            this.Close();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -178,5 +167,157 @@ namespace Fájl_áthelyező
                 Properties.Settings.Default.Upgrade();
             }
         }
+
+
+        //Pécs
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Path.GetDirectoryName(Properties.Settings.Default.sourcePecsFile)))
+            {
+                labPFileDialog.InitialDirectory = Path.GetDirectoryName(Properties.Settings.Default.sourcePecsFile);
+            }
+            else
+            {
+                labPFileDialog.InitialDirectory = @"C:\";
+            }
+            if (labPFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                labPTBox.Text = labPFileDialog.FileName;
+                Properties.Settings.Default.sourcePecsFile = labPFileDialog.FileName;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Path.GetDirectoryName(Properties.Settings.Default.sourcePecsSemFile)))
+            {
+                labPSemFileDialog.InitialDirectory = Path.GetDirectoryName(Properties.Settings.Default.sourcePecsSemFile);
+            }
+            else
+            {
+                labPFileDialog.InitialDirectory = @"C:\";
+            }
+            if (labPSemFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                labPSemTBox.Text = labPLFileDialog.FileName;
+                Properties.Settings.Default.sourcePecsSemFile = labPSemFileDialog.FileName;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Properties.Settings.Default.destinationPecsDir))
+            {
+                destPFBD.SelectedPath = Properties.Settings.Default.destinationPecsDir;
+            }
+            else
+            {
+                destPFBD.SelectedPath = @"C:\";
+            }
+            if (destPFBD.ShowDialog() == DialogResult.OK)
+            {
+                destPDirTBox.Text = destPFBD.SelectedPath;
+                Properties.Settings.Default.destinationPecsDir = destPFBD.SelectedPath;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Path.GetDirectoryName(Properties.Settings.Default.sourcePecsLabFile)))
+            {
+                labPLFileDialog.InitialDirectory = Path.GetDirectoryName(Properties.Settings.Default.sourcePecsLabFile);
+            }
+            else
+            {
+                labPLFileDialog.InitialDirectory = @"C:\";
+            }
+            if (labPLFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                labPLTBox.Text = labPLFileDialog.FileName;
+                Properties.Settings.Default.sourcePecsLabFile = labPLFileDialog.FileName;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Path.GetDirectoryName(Properties.Settings.Default.sourcePecsLabSemFile)))
+            {
+                labPLSemFileDialog.InitialDirectory = Path.GetDirectoryName(Properties.Settings.Default.sourcePecsLabSemFile);
+            }
+            else
+            {
+                labPLSemFileDialog.InitialDirectory = @"C:\";
+            }
+            if (labPLSemFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                labPLSemTBox.Text = labPLSemFileDialog.FileName;
+                Properties.Settings.Default.sourcePecsLabSemFile = labPLSemFileDialog.FileName;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Properties.Settings.Default.destinationPecsLabDir))
+            {
+                destPLFBD.SelectedPath = Properties.Settings.Default.destinationPecsLabDir;
+            }
+            else
+            {
+                destPLFBD.SelectedPath = @"C:\";
+            }
+            if (destPLFBD.ShowDialog() == DialogResult.OK)
+            {
+                destPLDirTBox.Text = destPLFBD.SelectedPath;
+                Properties.Settings.Default.destinationPecsLabDir = destPLFBD.SelectedPath;
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+            }
+        }
+
+        //Gyakoriság
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string[] ms = sendFreqTB.Text.Split(':');
+            if (ms.Length == 2)
+            {
+                string sendFreq = "00:" + ms[0].ToString().PadLeft(2, '0') + ":" + ms[1];
+                TimeSpan ts;
+                if (TimeSpan.TryParse(sendFreq, out ts))
+                {
+                    int intval = int.Parse(ms[0]);
+                    Properties.Settings.Default.freqM = intval;
+                    intval = int.Parse(ms[1]);
+                    Properties.Settings.Default.freqS = intval;
+                }
+                else
+                {
+                    MessageBox.Show("Rossz idő formátum! (mm:ss)");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Rossz idő formátum! (mm:ss)");
+            }
+            Properties.Settings.Default.send = sendBCB.Checked;
+            Properties.Settings.Default.receive = receiveBCB.Checked;
+            Properties.Settings.Default.psend = sendPCB.Checked;
+            Properties.Settings.Default.preceive = receivePCB.Checked;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Upgrade();
+            this.Close();
+        }
+
     }
 }

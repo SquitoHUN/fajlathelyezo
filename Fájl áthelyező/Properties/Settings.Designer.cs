@@ -12,7 +12,7 @@ namespace Fájl_áthelyező.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -140,6 +140,102 @@ namespace Fájl_áthelyező.Properties {
             }
             set {
                 this["receive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("n:\\szszard.msg")]
+        public string sourcePecsFile {
+            get {
+                return ((string)(this["sourcePecsFile"]));
+            }
+            set {
+                this["sourcePecsFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("n:\\szszard.sem")]
+        public string sourcePecsSemFile {
+            get {
+                return ((string)(this["sourcePecsSemFile"]));
+            }
+            set {
+                this["sourcePecsSemFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\pte_labor\\teszt\\in")]
+        public string destinationPecsDir {
+            get {
+                return ((string)(this["destinationPecsDir"]));
+            }
+            set {
+                this["destinationPecsDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\pte_labor\\teszt\\out\\szszard.msg")]
+        public string sourcePecsLabFile {
+            get {
+                return ((string)(this["sourcePecsLabFile"]));
+            }
+            set {
+                this["sourcePecsLabFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\pte_labor\\teszt\\out\\szszard.sem")]
+        public string sourcePecsLabSemFile {
+            get {
+                return ((string)(this["sourcePecsLabSemFile"]));
+            }
+            set {
+                this["sourcePecsLabSemFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("m:\\")]
+        public string destinationPecsLabDir {
+            get {
+                return ((string)(this["destinationPecsLabDir"]));
+            }
+            set {
+                this["destinationPecsLabDir"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool psend {
+            get {
+                return ((bool)(this["psend"]));
+            }
+            set {
+                this["psend"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool preceive {
+            get {
+                return ((bool)(this["preceive"]));
+            }
+            set {
+                this["preceive"] = value;
             }
         }
     }
