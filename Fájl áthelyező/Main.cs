@@ -99,19 +99,44 @@ namespace Fájl_áthelyező
 
         public void OnTimeEvent(object sender, ElapsedEventArgs e)
         {
-            Invoke(new Action(() =>
+            Invoke(new Action(()=>
             {
                 s--;
-                if (s <= 0 && m != 0)
+                if(s<=0 && m!=0)
                 {
                     s = 59;
                     m--;
                 }
-                if (s <= 0 && m <= 0)
+                if(Directory.Exists(Properties.Settings.Default.destinationDir))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(Properties.Settings.Default.destinationDir);
+                    dir.Refresh();
+                    dir=null;
+                }
+                if(Directory.Exists(Properties.Settings.Default.destinationBonyDir))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(Properties.Settings.Default.destinationBonyDir);
+                    dir.Refresh();
+                    dir=null;
+                }
+                if(Directory.Exists(Properties.Settings.Default.destinationPecsDir))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(Properties.Settings.Default.destinationPecsDir);
+                    dir.Refresh();
+                    dir=null;
+                }
+                if(Directory.Exists(Properties.Settings.Default.destinationPecsLabDir))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(Properties.Settings.Default.destinationPecsLabDir);
+                    dir.Refresh();
+                    dir=null;
+                }
+
+                if(s<=0 && m<=0)
                 {
                     if(Properties.Settings.Default.send == true)
                     {
-                        if (File.Exists(sourceSemFile) && !File.Exists(destinationSemFile) && !File.Exists(destinationFile))
+                        if(File.Exists(sourceSemFile) && !File.Exists(destinationSemFile) && !File.Exists(destinationFile))
                         {
                             DateTime now = DateTime.Now;
                             try
@@ -210,11 +235,11 @@ namespace Fájl_áthelyező
                                     }
                                 }
                             }
-                            if (lockSemFile != null)
+                            if(lockSemFile != null)
                             {
                                 lockSemFile.Dispose();
                             }
-                            if (lockLabFile != null)
+                            if(lockLabFile != null)
                             {
                                 lockLabFile.Dispose();
                             }
@@ -259,7 +284,7 @@ namespace Fájl_áthelyező
                     
                     if(Properties.Settings.Default.psend == true)
                     {
-                        if (File.Exists(sourcePecsLabSemFile) && File.Exists(sourcePecsLabFile) && !File.Exists(destinationPecsLabFile) && !File.Exists(destinationPecsLabSemFile))
+                        if(File.Exists(sourcePecsLabSemFile) && File.Exists(sourcePecsLabFile) && !File.Exists(destinationPecsLabFile) && !File.Exists(destinationPecsLabSemFile))
                         {
                             DateTime now = DateTime.Now;
                             try
@@ -293,7 +318,7 @@ namespace Fájl_áthelyező
                         }
                     }
                     
-                    if (File.Exists(destinationFile) && !File.Exists(destinationSemFile) && !IsFileLocked(destinationFile))
+                    if(File.Exists(destinationFile) && !File.Exists(destinationSemFile) && !IsFileLocked(destinationFile))
                     {
                         File.Create(destinationSemFile).Dispose();
                     }
