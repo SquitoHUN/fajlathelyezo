@@ -43,21 +43,19 @@ namespace Fájl_áthelyező
 
         }
 
-        public bool IsFileLocked(string filename)
+        public bool IsItThere(string filename)
         {
-            bool Locked = false;
+            bool Yup = true;
             try
             {
-                FileStream fs =
-                    File.Open(filename, FileMode.OpenOrCreate,
-                    FileAccess.ReadWrite, FileShare.None);
+                FileStream fs = File.Open(filename, FileMode.Open, FileAccess.ReadWrite);
                 fs.Close();
             }
             catch (IOException ex)
             {
-                Locked = true;
+                Yup = false;
             }
-            return Locked;
+            return Yup;
         }
 
         public Main()
@@ -136,7 +134,7 @@ namespace Fájl_áthelyező
                 {
                     if(Properties.Settings.Default.send == true)
                     {
-                        if(File.Exists(sourceSemFile) && !File.Exists(destinationSemFile) && !File.Exists(destinationFile))
+                        if(IsItThere(sourceSemFile) && !IsItThere(destinationSemFile) && !IsItThere(destinationFile))
                         {
                             DateTime now = DateTime.Now;
                             try
@@ -177,7 +175,7 @@ namespace Fájl_áthelyező
 
                     if(Properties.Settings.Default.receive == true)
                     {
-                        if (File.Exists(sourceBonySemFile) && File.Exists(sourceBonyFile) && !File.Exists(destinationBonyFile) && !File.Exists(destinationBonySemFile))
+                        if (IsItThere(sourceBonySemFile) && IsItThere(sourceBonyFile) && !IsItThere(destinationBonyFile) && !IsItThere(destinationBonySemFile))
                         {
                             FileStream lockSemFile = null;
                             FileStream lockLabFile = null;
@@ -248,7 +246,7 @@ namespace Fájl_áthelyező
 
                     if(Properties.Settings.Default.preceive == true)
                     {
-                        if (File.Exists(sourcePecsSemFile) && File.Exists(sourcePecsFile) && !File.Exists(destinationPecsFile) && !File.Exists(destinationPecsSemFile))
+                        if (IsItThere(sourcePecsSemFile) && IsItThere(sourcePecsFile) && !IsItThere(destinationPecsFile) && !IsItThere(destinationPecsSemFile))
                         {
                             DateTime now = DateTime.Now;
                             try
@@ -284,7 +282,7 @@ namespace Fájl_áthelyező
                     
                     if(Properties.Settings.Default.psend == true)
                     {
-                        if(File.Exists(sourcePecsLabSemFile) && File.Exists(sourcePecsLabFile) && !File.Exists(destinationPecsLabFile) && !File.Exists(destinationPecsLabSemFile))
+                        if(IsItThere(sourcePecsLabSemFile) && IsItThere(sourcePecsLabFile) && !IsItThere(destinationPecsLabFile) && !IsItThere(destinationPecsLabSemFile))
                         {
                             DateTime now = DateTime.Now;
                             try
@@ -318,7 +316,7 @@ namespace Fájl_áthelyező
                         }
                     }
                     
-                    if(File.Exists(destinationFile) && !File.Exists(destinationSemFile) && !IsFileLocked(destinationFile))
+                    if(File.Exists(destinationFile) && !File.Exists(destinationSemFile))
                     {
                         File.Create(destinationSemFile).Dispose();
                     }
